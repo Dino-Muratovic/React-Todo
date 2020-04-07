@@ -7,13 +7,15 @@ import ToDo from './Todo';
 
 const TodoList = props => {
 
-    console.log(props)
+    console.log(`this is props inside TodoList`, props)
     return(
         <>
-        <div>This is TodoList:</div>
-            
-        <ToDo/>
-        </>
+        <div>This is TodoList:</div> 
+            {props.toDoTasks.map(item => 
+                // {console.log(`===>`,item.id)}
+                (<ToDo key={item.id} item={item} toggleTodo={props.toggleTodo}/>)
+            )}                   
+         </>
     )
 }
 

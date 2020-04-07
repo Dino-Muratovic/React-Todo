@@ -21,21 +21,42 @@ class App extends React.Component {
     this.state = {
       toDoTasks // set the state to be blank strings     
     }
-  }
-  
+  }  
 
     //EVENT HANDLERS HERE
+    //This function with all the inner functionality including the state is getting passed down to TodoForm
     addTodoItem = (e,item) => {
       e.preventDefault();
       // console.log(`this is e`, e);
       // console.log(`this is item`, item);
       const newTodoItem = {
-        task: '',
+        task: item,
         id: Date.now(),
         completed: false
       };
       this.setState({
-        toDoTasks: [...this.state.toDoTasks, newTodoItem]
+        toDoTasks: [...this.state.toDoTasks, newTodoItem] // when user inputs whatever info it replaces the old empty usestate array with a new input information
+      })
+}
+
+    //Toggle to do
+
+    toggleTodo = itemId => {
+      console.log(itemId);
+    // map over array
+    // when we find the item we clicked, toggle the purchased field
+    // otherwise return the item untouched
+      this.setState({
+        toDoTasks: this.state.toDoTasks.map(item => {
+          console.log(`this is item inside map`, item)
+          if (itemId === item.id) {
+            return {
+              ...item,
+              completed: !item.completed              
+            };
+          }
+          return item;
+        })
       })
 
     }
@@ -47,10 +68,15 @@ class App extends React.Component {
     return (
       <div>
         <h2>Welcome to your Todo App!</h2>
-        <TodoForm addTodoItem={this.addTodoItem}/>
+        {/* pass down the event handler to the TodoForm  */}
+        <TodoForm addTodoItem={this.addTodoItem}/> 
 
         {/* pass down the state to ToDoList */}
-        <TodoList tasksToAdd={this.state.toDoTasks}/>
+        <TodoList
+         toDoTasks={this.state.toDoTasks}
+         toggleTodo={this.toggleTodo}
+         
+         />
       </div>
     );
   }
