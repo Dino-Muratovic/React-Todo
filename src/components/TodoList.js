@@ -10,11 +10,14 @@ const TodoList = props => {
     console.log(`this is props inside TodoList`, props)
     return(
         <>
-        <div>This is TodoList:</div> 
+        <div>This is TodoList:
             {props.toDoTasks.map(item => 
                 // {console.log(`===>`,item.id)}
-                (<ToDo key={item.id} item={item} toggleTodo={props.toggleTodo}/>)
-            )}                   
+                //pass down the props to the ToDo component
+                (<ToDo key={item.id} item={item} toggleTodo={props.toggleTodo}/>)                
+            )} 
+            <button className="clear-btn" onClick={props.clearCompleted}>Clear</button>   
+        </div>                   
          </>
     )
 }

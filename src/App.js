@@ -58,7 +58,15 @@ class App extends React.Component {
           return item;
         })
       })
+    }
 
+    //Clear completed
+    clearCompleted = e => {
+      e.preventDefault();
+      // if item is completed (item.completed is true) then filter out
+      this.setState({
+        toDoTasks: this.state.toDoTasks.filter(item => !item.completed)
+      })
     }
     
 
@@ -75,6 +83,7 @@ class App extends React.Component {
         <TodoList
          toDoTasks={this.state.toDoTasks}
          toggleTodo={this.toggleTodo}
+         clearCompleted={this.clearCompleted}
          
          />
       </div>

@@ -35,11 +35,11 @@ onInputChange = event => {
                 name="todo"
                 onChange={this.onInputChange}
                 value={this.state.todo}
-            />
-            
-            
+            />   
+
             <button>Add</button>
-            <button>Clear</button>
+            
+            
         </form>  
     );
   }
